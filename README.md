@@ -1,4 +1,4 @@
-**# Smart CV Improvement Platform**
+# CV Perfector
 
 **Business Problem**
 
