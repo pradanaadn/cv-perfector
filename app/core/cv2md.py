@@ -1,6 +1,18 @@
-import pymupdf4llm
-import pathlib
+from pymupdf4llm import to_markdown
+from markdown_to_json import dictify, jsonify
 
-md_text = pymupdf4llm.to_markdown("CV_AI_PRADANA.pdf")
+def cv2md(file_path:str)->str:
+    """Function to convert CV in PDF to Markdown
+    Args:
+        file_path (str):file path of the CV
 
-pathlib.Path("output.md").write_bytes(md_text.encode())
+    Returns:
+        str: CV in Markdown Format
+    """
+    
+    md = to_markdown(file_path)
+    print(md)
+    return md
+
+
+print(jsonify(cv2md(file_path='CV_AI_PRADANA.pdf')))
