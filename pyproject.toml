@@ -6,4 +6,5 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.4",
+    "pymupdf4llm>=0.0.17",
 ]
