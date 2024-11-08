@@ -7,7 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.4",
     "langchain>=0.3.7",
+    "loguru>=0.7.2",
     "markdown-to-json>=2.1.2",
+    "pydantic-settings>=2.6.1",
     "pydantic>=2.9.2",
     "pymupdf4llm>=0.0.17",
 ]
