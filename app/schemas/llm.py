@@ -20,13 +20,13 @@ class GeminiConfig:
             inclusive. Defaults to 5,000.
         response_mime_type (Literal["text/plain", "application/json"]): The MIME type of the response.  Can be either
             "text/plain" for plain text or "application/json" for JSON. Defaults to "application/json".
-    
+
     Instantiation:
      .. code-block:: python
         llm_config = GeminiConfig(
-        temperature = 0.5, 
+        temperature = 0.5,
         top_p = 0.98,
-        top_k = 20, 
+        top_k = 20,
         max_token = 1000,
         response_mime_type = "text/plain" )
 
@@ -38,7 +38,7 @@ class GeminiConfig:
     temperature: Union[int, float] = Field(ge=0, le=2, default=1)
     top_p: Union[int, float] = Field(ge=0, le=1, default=0.95)
     top_k: int = Field(ge=1, default=40)
-    max_token = Field(ge=0, le=10_000, default=5_000)
+    max_token: int = Field(ge=0, le=10_000, default=5_000)
     response_mime_type: Literal["text/plain", "application/json"] = Field(
         default="application/json"
     )

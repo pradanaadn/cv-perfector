@@ -2,7 +2,7 @@ from yaml import load, SafeLoader
 from loguru import logger
 
 try:
-    with open("secrets.yaml", "r") as file:
+    with open("secret.yaml", "r") as file:
         credential = load(file, Loader=SafeLoader)
 
     GEMINI_API_KEY = credential["llm_key"]["gemini"]
