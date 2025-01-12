@@ -418,6 +418,7 @@ dependencies = [
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "pymupdf4llm" },
+    { name = "pyyaml" },
     { name = "six" },
 ]
 
@@ -436,6 +437,7 @@ requires-dist = [
     { name = "pydantic", specifier = ">=2.9.2" },
     { name = "pydantic-settings", specifier = ">=2.6.1" },
     { name = "pymupdf4llm", specifier = ">=0.0.17" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "six", specifier = ">=1.16.0" },
 ]
 

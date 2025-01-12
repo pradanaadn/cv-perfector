@@ -18,5 +18,6 @@ dependencies = [
     "pydantic-settings>=2.6.1",
     "pydantic>=2.9.2",
     "pymupdf4llm>=0.0.17",
+    "pyyaml>=6.0.2",
     "six>=1.16.0",
 ]
