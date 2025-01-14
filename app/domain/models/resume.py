@@ -1,6 +1,6 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel, Field, EmailStr
-
+from datetime import datetime
 
 class Experience(BaseModel):
     company: str = Field(
@@ -11,13 +11,13 @@ class Experience(BaseModel):
         default=None,
         description="The name of position where the worker has experience in the resume.",
     )
-    start_date: str = Field(
+    start_date: datetime = Field(
         default=None,
         description="The start date where the worker has experience in the resume.",
     )
-    end_date: Optional[str] = Field(
+    end_date: Union[datetime, str] = Field(
         default=None,
-        description="The end date where the worker has experience in the resume.",
+        description="The end date of the worker's experience on the resume, or now if they are still working.",
     )
     description: Optional[str] = Field(
         default=None,
