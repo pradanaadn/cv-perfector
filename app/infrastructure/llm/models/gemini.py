@@ -1,5 +1,6 @@
 from llama_index.llms.gemini import Gemini
 from llama_index.core.program.llm_program import LLMTextCompletionProgram
+from llama_index.core.prompts import PromptTemplate
 from llama_index.core.llms import CustomLLM
 from pydantic import BaseModel
 from typing import Union
@@ -21,25 +22,30 @@ class GeminiLlamaIndex:
         structure_predict(model_output: BaseModel, prompt: str, text: str) -> BaseModel:
             Generates a structured prediction based on the given prompt and text using the Gemini LLM.
     """
-    def __init__(self, model: Union[GeminiModel, str]= None, api_key: str = None):
+
+    def __init__(self, model: Union[GeminiModel, str] = None, api_key: str = None):
         self.model = model or gemini_model.model
         self.api_key = api_key or secret.services.get("LLM").config.get("gemini")
-        self.llm:CustomLLM = Gemini(model=self.model, api_key=self.api_key)
-        
+        self.llm: CustomLLM = Gemini(model=self.model, api_key=self.api_key)
+
     def complete(cls, prompt: str):
         llm_response = cls.llm.complete(prompt)
         return llm_response
-    
+
     async def async_complete(cls, prompt: str):
-        llm_response =  await cls.llm.acomplete(prompt)
+        llm_response = await cls.llm.astream_complete(prompt, formatted=True)
         return llm_response
-    
-    def structure_predict(cls, model_output:BaseModel,  prompt: str, text:str,):
+
+    def structure_predict(
+        cls,
+        model_output: BaseModel,
+        prompts: PromptTemplate,
+        text: str,
+    ):
         textCompletion = LLMTextCompletionProgram.from_defaults(
             output_cls=model_output,
-            prompt_template_str=prompt,
             llm=cls.llm,
+            prompt=prompts,
         )
-        llm_output = textCompletion.run(text=text)
+        llm_output = textCompletion(text=text)
         return llm_output
-

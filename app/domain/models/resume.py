@@ -11,11 +11,11 @@ class Experience(BaseModel):
         default=None,
         description="The name of position where the worker has experience in the resume.",
     )
-    start_date: datetime = Field(
+    start_date: Union[datetime, str, None] = Field(
         default=None,
         description="The start date where the worker has experience in the resume.",
     )
-    end_date: Union[datetime, str] = Field(
+    end_date: Union[datetime, str, None] = Field(
         default=None,
         description="The end date of the worker's experience on the resume, or now if they are still working.",
     )
@@ -38,10 +38,10 @@ class Education(BaseModel):
         default=None, description="The name of the educational institution."
     )
     degree: str = Field(default=None, description="The degree obtained or pursued.")
-    start_date: str = Field(
+    start_date: Union[datetime, str, None] = Field(
         default=None, description="The start date of the education period."
     )
-    end_date: Optional[str] = Field(
+    end_date: Union[datetime, str, None] = Field(
         default=None, description="The end date of the education period, if applicable."
     )
     description: Optional[str] = Field(
@@ -54,10 +54,10 @@ class Project(BaseModel):
     project_link: Optional[str] = Field(
         default=None, description="The link to the project, if available."
     )
-    start_date: Optional[str] = Field(
+    start_date: Union[datetime, str, None] = Field(
         default=None, description="The start date of the project."
     )
-    end_date: Optional[str] = Field(
+    end_date: Union[datetime, str,None] = Field(
         default=None, description="The end date of the project, if applicable."
     )
     tech_stack: Optional[List[Skill]] = Field(
@@ -88,11 +88,11 @@ class AdditionalInfo(BaseModel):
         default=None,
         description="The title or name of the additional information or section.",
     )
-    start_date: Optional[str] = Field(
+    start_date: Union[datetime, str, None] = Field(
         default=None,
         description="The start date of the additional information or section.",
     )
-    end_date: Optional[str] = Field(
+    end_date: Union[datetime, str, None] = Field(
         default=None,
         description="The end date of the additional informationor or section, if applicable.",
     )
