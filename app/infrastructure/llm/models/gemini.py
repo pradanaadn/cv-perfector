@@ -4,10 +4,11 @@ from llama_index.core.prompts import PromptTemplate
 from llama_index.core.llms import CustomLLM
 from pydantic import BaseModel
 from typing import Union
+from app.domain.interfaces.base_llm import BaseLLM
 from app.core.config import secret, GeminiModel, gemini_model
 
 
-class GeminiLlamaIndex:
+class GeminiLlamaIndex(BaseLLM):
     """
     A class to interact with the Gemini LLM (Large Language Model) for text completion and structured prediction.
     Attributes:
