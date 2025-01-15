@@ -1,3 +1,5 @@
+import pytest
+from deepdiff import DeepDiff
 from loguru import logger
 from pprint import pprint
 import asyncio
@@ -6,8 +8,10 @@ import aiofiles
 from llama_index.core.prompts import PromptTemplate
 from app.infrastructure.llm.models.gemini import GeminiLlamaIndex
 from app.domain.models.resume import Resume
+  
 
 
+@pytest.mark.asyncio
 async def test_async_complete():
     llm = GeminiLlamaIndex()
     resp = await llm.async_complete("Buatkan puisi")
@@ -15,7 +19,10 @@ async def test_async_complete():
     async for response in resp:
         print(response, end="", flush=True)
 
+    assert resp is not None or resp != ""
 
+
+@pytest.mark.asyncio
 async def test_structure_output():
     llm = GeminiLlamaIndex()
     prompt = PromptTemplate(
@@ -26,14 +33,11 @@ async def test_structure_output():
             "If there information about soft skill, technical skill, language proficiency pass it to Skill class"
         )
     )
-    async with aiofiles.open(
-        "documents/markdown/output.md", "r"
-    ) as file:
+    async with aiofiles.open("documents/markdown/output.md", "r") as file:
         text = await file.read()
     response = llm.structure_predict(Resume, prompt, text)
 
-    pprint(response)
+    
 
-
-if __name__ == "__main__":
-    asyncio.run(test_structure_output())
+    assert isinstance(response, Resume), f"The output should be a Resume object, got {type(response)}"
+    assert response is not None, "The response should not be None"

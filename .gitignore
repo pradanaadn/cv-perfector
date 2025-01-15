@@ -1,6 +1,7 @@
 #secret
 secrets.yaml
-
+#experiment
+experiment/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

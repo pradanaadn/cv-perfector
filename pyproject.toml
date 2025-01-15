@@ -23,4 +23,11 @@ dependencies = [
     "pyyaml>=6.0.2",
     "six>=1.16.0",
     "aiofiles>=24.1.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.2",
+    "deepdiff>=8.1.1",
+]
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:.*Jupyter is migrating.*:DeprecationWarning",
 ]

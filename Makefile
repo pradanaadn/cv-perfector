@@ -5,4 +5,4 @@ clean:
 	echo "Cache cleaned."
 
 test:
-	echo "Test"
+	uv run pytest -v .
