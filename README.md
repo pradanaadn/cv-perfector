@@ -23,3 +23,4 @@ We propose a smart CV improvement platform that leverages advanced natural langu
 * **For Recruitment Platforms**: Enhanced user engagement and service differentiation.
 
 
+# Development
