@@ -9,4 +9,3 @@ class Analysis(BaseModel):
     recommended_actions: str
     score: float
     
-    
