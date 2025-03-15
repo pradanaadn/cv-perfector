@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from llama_index.core.prompts import PromptTemplate
 from app.domain.interfaces.base_parser import BaseParser
 from app.domain.interfaces.base_llm import BaseLLM
-import fitz  # PyMuPDF
+import fitz
 import pymupdf4llm
 
 
@@ -22,19 +22,19 @@ class PDFParser(BaseParser):
 
     def __init__(
         self,
-        llm: Optional[Union[BaseLLM]] = None,
+        llm: Optional[BaseLLM] = None,
         model: Optional[BaseModel] = None,
         prompts: Optional[PromptTemplate] = None,
         file_path: Optional[str] = None,
-        file: Optional[bytes] = None,
+        file_bytes: Optional[bytes] = None,
     ):
-        if not file_path and not file:
-            raise ValueError("File path or file must be provided.")
-        self.file_path = file_path
-        self.file = file
-        self.llm = llm
-        self.model = model
-        self.prompt = prompts
+        super().__init__(
+            llm=llm,
+            model=model,
+            prompts=prompts,
+            file_path=file_path,
+            file_bytes=file_bytes,
+        )
 
     def extract_text(self) -> str:
         file_document = self.byte_or_path()

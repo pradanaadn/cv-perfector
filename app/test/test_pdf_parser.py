@@ -1,5 +1,5 @@
 import pytest
-from app.infrastructure.pdf.pdf_parser import PDFParser
+from app.infrastructure.parser.pdf.pdf_parser import PDFParser 
 from pydantic import BaseModel
 
 FILE_PATH = "documents/resume/functionalsample.pdf"
@@ -25,7 +25,7 @@ def test_pdf_parser_path():
 def test_pdf_parser_byte():
     with open(FILE_PATH, 'rb') as f:
         pdf = f.read()
-    pdf_parser = PDFParser(file=pdf)
+    pdf_parser = PDFParser(file_bytes=pdf)
     markdown_text = pdf_parser.extract_text()
     assert markdown_text != '', "The extracted text is empty."
 

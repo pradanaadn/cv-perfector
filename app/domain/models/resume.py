@@ -1,21 +1,21 @@
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Literal, Tuple
 from pydantic import BaseModel, Field, EmailStr
-from datetime import datetime
+from datetime import date
 
 
-class Experience(BaseModel):
+class WorkingExperience(BaseModel):
     """
     Experience model representing a worker's job experience.
 
     Attributes:
         company (str): The name of the company or institution where the worker has experience in the resume.
         position (str): The name of the position where the worker has experience in the resume.
-        start_date (Union[datetime, str, None]): The start date of the worker's experience in the resume.
-        end_date (Union[datetime, str, None]): The end date of the worker's experience in the resume, or now if they are still working.
+        start_date (Union[date, str, None]): The start date of the worker's experience in the resume.
+        end_date (Union[date, str, None]): The end date of the worker's experience in the resume, or now if they are still working.
         description (Optional[str]): The job description or accomplishment where the person has experience in the resume.
     """
 
-    company: str = Field(
+    work_place: str = Field(
         default=None,
         description="The name of the company or institution where the worker has experience in the resume.",
     )
@@ -23,11 +23,11 @@ class Experience(BaseModel):
         default=None,
         description="The name of position where the worker has experience in the resume.",
     )
-    start_date: Union[datetime, str, None] = Field(
+    start_date: Union[str, None] = Field(
         default=None,
         description="The start date where the worker has experience in the resume.",
     )
-    end_date: Union[datetime, str, None] = Field(
+    end_date: Union[date, str, None] = Field(
         default=None,
         description="The end date of the worker's experience on the resume, or now if they are still working.",
     )
@@ -47,6 +47,10 @@ class Skill(BaseModel):
     """
 
     name: str = Field(default=None, description="The skill of the person in the resume")
+    type: Optional[Literal["Technical", "Soft", "Language"]] = Field(
+        default=None,
+        description="The type of the skill in the resume",
+    )
     level: Optional[str] = Field(
         default=None,
         description="The skill mastery or level of the person in the resume",
@@ -59,10 +63,10 @@ class Certification(BaseModel):
         default=None,
         description="The link to the certification, if available.",
     )
-    start_date: Union[datetime, str, None] = Field(
+    start_date: Union[date, str, None] = Field(
         default=None, description="The start date of the certification, if applicable."
     )
-    expired_date: Union[datetime, str, None] = Field(
+    expired_date: Union[date, str, None] = Field(
         default=None, description="The end date of the certification, if applicable."
     )
     description: Optional[str] = Field(
@@ -78,8 +82,8 @@ class Education(BaseModel):
     Attributes:
         institution (str): The name of the educational institution.
         degree (str): The degree obtained or pursued.
-        start_date (Union[datetime, str, None]): The start date of the education period.
-        end_date (Union[datetime, str, None]): The end date of the education period, if applicable.
+        start_date (Union[date, str, None]): The start date of the education period.
+        end_date (Union[date, str, None]): The end date of the education period, if applicable.
         description (Optional[str]): The description of the education or course.
     """
 
@@ -87,10 +91,13 @@ class Education(BaseModel):
         default=None, description="The name of the educational institution."
     )
     degree: str = Field(default=None, description="The degree obtained or pursued.")
-    start_date: Union[datetime, str, None] = Field(
+    GPA: Optional[Tuple[float,float]] = Field(
+        default=None, description="The GPA obtained during the education period."
+    )
+    start_date: Union[date, str, None] = Field(
         default=None, description="The start date of the education period."
     )
-    end_date: Union[datetime, str, None] = Field(
+    end_date: Union[date, str, None] = Field(
         default=None, description="The end date of the education period, if applicable."
     )
     description: Optional[str] = Field(
@@ -105,8 +112,8 @@ class Project(BaseModel):
     Attributes:
         name (str): The name of the project.
         project_link (Optional[str]): The link to the project, if available.
-        start_date (Union[datetime, str, None]): The start date of the project.
-        end_date (Union[datetime, str, None]): The end date of the project, if applicable.
+        start_date (Union[date, str, None]): The start date of the project.
+        end_date (Union[date, str, None]): The end date of the project, if applicable.
         tech_stack (Optional[List[Skill]]): The list of technologies used in the project.
         description (Optional[str]): A brief description of the project.
     """
@@ -115,10 +122,10 @@ class Project(BaseModel):
     project_link: Optional[str] = Field(
         default=None, description="The link to the project, if available."
     )
-    start_date: Union[datetime, str, None] = Field(
+    start_date: Union[date, str, None] = Field(
         default=None, description="The start date of the project."
     )
-    end_date: Union[datetime, str, None] = Field(
+    end_date: Union[date, str, None] = Field(
         default=None, description="The end date of the project, if applicable."
     )
     tech_stack: Optional[List[Skill]] = Field(
@@ -159,24 +166,24 @@ class AdditionalInfo(BaseModel):
 
     Attributes:
         name (str): The name of the additional information or activity.
-        start_date (Union[datetime, str, None]): The start date of the additional information or activity.
-        end_date (Union[datetime, str, None]): The end date of the additional information or activity, if applicable.
+        start_date (Union[date, str, None]): The start date of the additional information or activity.
+        end_date (Union[date, str, None]): The end date of the additional information or activity, if applicable.
         description (str): The description or content of the additional information or activity.
     """
 
-    name: str = Field(
+    name: Optional[str] = Field(
         default=None,
         description="The name the additional information or activity.",
     )
-    start_date: Union[datetime, str, None] = Field(
+    start_date: Union[date, str, None] = Field(
         default=None,
         description="The start date of the additional information or activity.",
     )
-    end_date: Union[datetime, str, None] = Field(
+    end_date: Union[date, str, None] = Field(
         default=None,
         description="The end date of the additional informationor or activity, if applicable.",
     )
-    description: str = Field(
+    description: Optional[str] = Field(
         default=None,
         description="The description or content of the additional information or activity.",
     )
@@ -196,6 +203,9 @@ class AdditionalSection(BaseModel):
     )
     additional_info: Optional[List[AdditionalInfo]] = Field(
         default=None, description="The list of additional info in the resume"
+    )
+    description: Optional[str] = Field(
+        default=None, description="The description of the aditional section."
     )
 
 
@@ -240,7 +250,7 @@ class Resume(BaseModel):
     education: Optional[List[Education]] = Field(
         default=None, description="The list of education the person in the resume"
     )
-    experiences: Optional[List[Experience]] = Field(
+    work_experiences: Optional[List[WorkingExperience]] = Field(
         default=None, description="The list of experience the person in the resume"
     )
     skills: Optional[List[Skill]] = Field(

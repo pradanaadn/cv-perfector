@@ -1,9 +1,4 @@
 import pytest
-from deepdiff import DeepDiff
-from loguru import logger
-from pprint import pprint
-import asyncio
-from pydantic import BaseModel
 import aiofiles
 from llama_index.core.prompts import PromptTemplate
 from app.infrastructure.llm.models.gemini import GeminiLlamaIndex

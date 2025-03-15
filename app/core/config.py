@@ -14,7 +14,7 @@ class GeminiModel(BaseModel):
         "models/gemini-1.5-pro-latest",
         "models/gemini-1.0-pro",
     ] = Field(
-        default="models/gemini-1.5-flash-latest",
+        default="models/gemini-2.0-flash-exp",
         description="The model of the Gemini LLM.",
     )
 

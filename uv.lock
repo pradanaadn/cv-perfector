@@ -434,6 +434,7 @@ dependencies = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pyyaml" },
+    { name = "rich" },
     { name = "six" },
 ]
 
@@ -459,6 +460,7 @@ requires-dist = [
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "pytest-asyncio", specifier = ">=0.25.2" },
     { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "rich", specifier = ">=13.9.4" },
     { name = "six", specifier = ">=1.16.0" },
 ]
 

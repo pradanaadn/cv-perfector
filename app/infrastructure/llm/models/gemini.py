@@ -24,10 +24,10 @@ class GeminiLlamaIndex(BaseLLM):
             Generates a structured prediction based on the given prompt and text using the Gemini LLM.
     """
 
-    def __init__(self, model: Union[GeminiModel, str] = None, api_key: str = None):
+    def __init__(self, model: Union[GeminiModel, str] = None, api_key: str = None, temperature: float = 0.1):
         self.model = model or gemini_model.model
         self.api_key = api_key or secret.services.get("LLM").config.get("gemini")
-        self.llm: CustomLLM = Gemini(model=self.model, api_key=self.api_key)
+        self.llm: CustomLLM = Gemini(model=self.model, api_key=self.api_key, temperature=temperature)
 
     def complete(cls, prompt: str):
         llm_response = cls.llm.complete(prompt)
